@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -7,16 +9,42 @@
     <!-- CSS -->
     <link rel="stylesheet" type="" href="/static/style/index.css">
 
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+    <!-- ICON FONT -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- SCRIPTS -->
+    <script src="/static/scripts/reveal_password.js" defer></script>
+
     <!-- MISC-->
     <title>Amaretti - Login</title>
 </head>
 
-<body class="bg-zinc-900 w-screen h-screen flex justify-center items-center">
+<body class="amaretti-body bg-zinc-900 w-screen h-screen flex justify-center items-center">
     <form action="/login" method="post"
         class="w-96 bg-zinc-800 rounded-xl border-2 border-yellow-500 flex flex-col p-8 gap-8 ">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit" name="submit" class="bg-yellow-500 text-zinc-800">Login</button>
+        <div
+            class="w-full bg-zinc-700 border border-yellow-500 shadow hover:shadow-lg ease-in duration-100 p-2 rounded-md">
+            <input type="text" name="username" placeholder="Username"
+                class="amaretti-login-input w-full text-yellow-300 placeholder:text-yellow-300/[.3]" />
+        </div>
+        <div
+            class="w-full flex justify-between align-center bg-zinc-700 border border-yellow-500 shadow hover:shadow-lg ease-in duration-100 p-2 rounded-md">
+            <input type="password" name="password" placeholder="Password"
+                class="amaretti-login-input grow text-yellow-300 placeholder:text-yellow-300/[.3] " />
+            <button type="button" onclick="togglePasswordVisibility(event)">
+                <span class="material-symbols-outlined text-base text-yellow-300/[.3]">
+                    visibility
+                </span>
+            </button>
+        </div>
+        <button type="submit" name="submit"
+            class="bg-yellow-500 text-lg hover:shadow-lg ease-in duration-100 text-zinc-800 rounded-md">Login</button>
     </form>
 </body>
 
