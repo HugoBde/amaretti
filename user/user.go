@@ -10,19 +10,31 @@ import (
 
 type User struct {
 	UUID     uuid.UUID
-	username string
+	Username string
 	password Password
 }
 
 type Session struct {
 	uuid       uuid.UUID
-	user       *User
+	User       *User
 	expiryTime time.Time
 }
 
 var UserDB map[string]*User = make(map[string]*User)
 
-var SessionDB map[uuid.UUID]Session = make(map[uuid.UUID]Session)
+var SessionDB map[uuid.UUID]*Session = make(map[uuid.UUID]*Session)
+
+func NewSession(user *User) (uuid.UUID, error) {
+	session := &Session{
+		uuid:       uuid.New(),
+		User:       user,
+		expiryTime: time.Now().Add(time.Hour),
+	}
+
+	SessionDB[session.uuid] = session
+
+	return session.uuid, nil
+}
 
 func NewUser(username string, password string) error {
 	// Ensure password is ok
@@ -39,7 +51,7 @@ func NewUser(username string, password string) error {
 	}
 
 	// At this point we are all good, save the username
-	newUser.username = username
+	newUser.Username = username
 	newUser.UUID = uuid.New()
 
 	// Store user in our mock db
@@ -51,7 +63,7 @@ func NewUser(username string, password string) error {
 func createSession(user *User) Session {
 	newSession := Session{
 		uuid:       uuid.New(),
-		user:       user,
+		User:       user,
 		expiryTime: time.Now().Add(time.Minute),
 	}
 
