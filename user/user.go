@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	. "hugobde.dev/amaretti/list"
 	. "hugobde.dev/amaretti/password"
 )
 
@@ -12,6 +13,7 @@ type User struct {
 	UUID     uuid.UUID
 	Username string
 	password Password
+	Lists    []List
 }
 
 type Session struct {
@@ -58,6 +60,10 @@ func NewUser(username string, password string) error {
 	UserDB[username] = &newUser
 
 	return nil
+}
+
+func (user *User) AddList(list List) {
+	user.Lists = append(user.Lists, list)
 }
 
 func createSession(user *User) Session {

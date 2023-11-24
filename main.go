@@ -9,6 +9,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 
+	"hugobde.dev/amaretti/list"
 	"hugobde.dev/amaretti/user"
 )
 
@@ -17,7 +18,6 @@ var HMAC_SECRET = []byte("IHateF1SoBad")
 const TOKEN_COOKIE_NAME = "authToken"
 
 func homePageGet(ctx *gin.Context) {
-	fmt.Println(ctx.Keys)
 	if session, ok := ctx.Keys["session"].(*user.Session); !ok {
 		ctx.Redirect(http.StatusSeeOther, "/login")
 	} else {
@@ -63,6 +63,16 @@ func loginFormPost(ctx *gin.Context) {
 		ctx.Redirect(http.StatusSeeOther, "/")
 	} else {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "invalid credentials"})
+	}
+}
+
+func listsGet(ctx *gin.Context) {
+	if session, ok := ctx.Keys["session"].(*user.Session); !ok {
+		ctx.Redirect(http.StatusSeeOther, "/login")
+	} else {
+		ctx.HTML(http.StatusOK, "lists.html", gin.H{
+			"Lists": session.User.Lists,
+		})
 	}
 }
 
@@ -120,6 +130,10 @@ func main() {
 		log.Fatalf("failed to create user: %s", err)
 	}
 
+	newList := list.NewList()
+
+	user.UserDB["user1"].AddList(newList)
+
 	router := gin.Default()
 	router.Static("/static", "./static/")
 	router.LoadHTMLGlob("templates/*")
@@ -130,6 +144,8 @@ func main() {
 
 	router.GET("/login", loginPageGet)
 	router.POST("/login", loginFormPost)
+
+	router.GET("/lists", listsGet)
 
 	router.Run(":8080")
 }

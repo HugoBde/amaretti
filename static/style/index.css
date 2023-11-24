@@ -552,8 +552,20 @@ video {
   display: flex;
 }
 
+.h-32 {
+  height: 8rem;
+}
+
 .h-screen {
   height: 100vh;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .w-96 {
@@ -608,6 +620,10 @@ video {
   border-width: 2px;
 }
 
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
 .border-yellow-500 {
   --tw-border-opacity: 1;
   border-color: rgb(234 179 8 / var(--tw-border-opacity));
@@ -639,6 +655,11 @@ video {
 
 .p-8 {
   padding: 2rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-base {
@@ -685,6 +706,10 @@ video {
 
 .placeholder\:text-yellow-300\/\[\.3\]::placeholder {
   color: rgb(253 224 71 / .3);
+}
+
+.hover\:underline:hover {
+  text-decoration-line: underline;
 }
 
 .hover\:shadow-lg:hover {

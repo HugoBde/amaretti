@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="" href="/static/style/index.css">
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+    <!-- ICON FONT -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- SCRIPTS -->
+
+    <!-- HTMX baby! -->
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+
+    <!-- MISC-->
+    <title>Amaretti - Login</title>
+</head>
+
+<body class="amaretti-body bg-zinc-900 w-screen h-screen ">
+    <nav class="w-full bg-zinc-800 flex p-8 items-center justify-between border-b-2 border-yellow-500">
+        <p class="text-yellow-300 text-2xl h-auto">Amaretti</p>
+        <div class="flex items-center gap-8 ">
+            <a class="text-yellow-300 hover:underline" href="#">Home</a>
+            <a class="text-yellow-300 hover:underline" href="#">Profile</a>
+        </div>
+    </nav>
+    <main hx-trigger="load" hx-get="/lists">
+
+    </main>
+</body>
+
+</html>
